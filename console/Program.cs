@@ -13,7 +13,9 @@ namespace console
 
 				while (true)
 				{
+					Console.ForegroundColor = ConsoleColor.Magenta;
 					Console.Write("Please enter your full name (eng): "); 
+					Console.ResetColor();
 					name = Console.ReadLine();
 
 					if (!string.IsNullOrWhiteSpace(name))
@@ -28,7 +30,9 @@ namespace console
 
 				while (true)
 				{
+					Console.ForegroundColor = ConsoleColor.Yellow;
 					Console.Write("Please enter your height (cm): ");
+					Console.ResetColor();
 					string inputHeight = Console.ReadLine();
 
 					if (int.TryParse(inputHeight, out height) && height > 0)
@@ -39,6 +43,7 @@ namespace console
 
 				while (true)
 				{
+					Console.ForegroundColor = ConsoleColor.Cyan;
 					Console.WriteLine("\nSelect your gender:");
 					Console.WriteLine("1. Male (ชาย)");
 					Console.WriteLine("2. Female (หญิง)");
@@ -48,7 +53,7 @@ namespace console
 
 					if (int.TryParse(genderInput, out genderChoice) && (genderChoice == 1 || genderChoice == 2))
 						break;
-
+					Console.ForegroundColor = ConsoleColor.DarkGreen;
 					Console.WriteLine("Error: Invalid choice. Please enter 1 or 2.\n");
 				}
 
@@ -62,9 +67,9 @@ namespace console
 					weight = height - 110;
 					Console.WriteLine("\nGender: Female");
 				}
-
+				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine("Your ideal weight is " + weight + " kg");
-
+				Console.ResetColor();
 				Console.Write("\nPress Q to quit or Enter to continue: ");
 				string exitInput = Console.ReadLine();
 
