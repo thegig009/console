@@ -1,20 +1,22 @@
+using System;
+
 namespace console
 {
 	internal class Program
 	{
 		static void Main(string[] args)
 		{
-			while (true)   
+			while (true)
 			{
 				string name = "";
-				int height = 0;
-				int genderChoice = 0;
-				int weight = 0;
+				double height = 0;
+				double weight = 0;
 
+				// รับชื่อ
 				while (true)
 				{
 					Console.ForegroundColor = ConsoleColor.Magenta;
-					Console.Write("Please enter your full name (eng): "); 
+					Console.Write("Please enter your full name (eng): ");
 					Console.ResetColor();
 					name = Console.ReadLine();
 
@@ -25,9 +27,10 @@ namespace console
 				}
 
 				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine("Hello, welcome " + name);
+				Console.WriteLine("Hello, welcome " + name + "!");
 				Console.ResetColor();
 
+			
 				while (true)
 				{
 					Console.ForegroundColor = ConsoleColor.Yellow;
@@ -35,7 +38,7 @@ namespace console
 					Console.ResetColor();
 					string inputHeight = Console.ReadLine();
 
-					if (int.TryParse(inputHeight, out height) && height > 0)
+					if (double.TryParse(inputHeight, out height) && height > 0)
 						break;
 
 					Console.WriteLine("Error: Height must be a positive number. Please try again.\n");
@@ -44,38 +47,39 @@ namespace console
 				while (true)
 				{
 					Console.ForegroundColor = ConsoleColor.Cyan;
-					Console.WriteLine("\nSelect your gender:");
-					Console.WriteLine("1. Male (ชาย)");
-					Console.WriteLine("2. Female (หญิง)");
-					Console.Write("Enter your choice (1 or 2): ");
+					Console.Write("Please enter your weight (kg): ");
+					Console.ResetColor();
+					string inputWeight = Console.ReadLine();
 
-					string genderInput = Console.ReadLine();
-
-					if (int.TryParse(genderInput, out genderChoice) && (genderChoice == 1 || genderChoice == 2))
+					if (double.TryParse(inputWeight, out weight) && weight > 0)
 						break;
-					Console.ForegroundColor = ConsoleColor.DarkGreen;
-					Console.WriteLine("Error: Invalid choice. Please enter 1 or 2.\n");
+
+					Console.WriteLine("Error: Weight must be a positive number. Please try again.\n");
 				}
 
-				if (genderChoice == 1)
-				{
-					weight = height - 100;
-					Console.WriteLine("\nGender: Male");
-				}
-				else
-				{
-					weight = height - 110;
-					Console.WriteLine("\nGender: Female");
-				}
+				
+				double heightMeters = height / 100.0;
+				double bmi = weight / (heightMeters * heightMeters);
+
+				
+				string result = "";
+				if (bmi < 18.5) result = "Underweight";
+				else if (bmi < 25) result = "Normal weight";
+				else if (bmi < 30) result = "Overweight";
+				else result = "Obesity";
+
 				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("Your ideal weight is " + weight + " kg");
+				Console.WriteLine($"\n{name}, your BMI is: {bmi:F2}");
+				Console.WriteLine("BMI Result: " + result);
 				Console.ResetColor();
+
+				
 				Console.Write("\nPress Q to quit or Enter to continue: ");
 				string exitInput = Console.ReadLine();
 
 				if (exitInput.ToLower() == "q")
 				{
-					break;   
+					break;
 				}
 
 				Console.Clear();
